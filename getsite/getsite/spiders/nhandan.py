@@ -11,9 +11,10 @@ class NhandanSpider(scrapy.Spider):
             yield response.follow(link.get(), callback=self.parse_categories)
 
     def parse_categories(self, response):
-        products = response.css('.story__heading')
+        products = response.css('.main-content.article')
         for product in products:
             yield {
-                'name': product.css('.cms-link::text').get().strip(),
-                'link': product.css('.cms-link::attr(href)').get().strip(),
+                'title': product.css('.article__title.cms-title::text').get(),
+                'date': product.css('.article__meta .time::text').get(),
+                'content': product.css('.article__body.cms-body p::text').getall(),
             }
