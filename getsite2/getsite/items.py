@@ -14,4 +14,5 @@ class GetsiteItem(scrapy.Item):
     content = scrapy.Field()
     category = scrapy.Field()
     url = scrapy.Field()
+    image_urls = scrapy.Field()
     pass
